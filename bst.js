@@ -1,6 +1,3 @@
-'use strict';
-
-
 function Node(data) {
     this.data = data;
     this.left = null;
@@ -17,11 +14,8 @@ class Tree {
         if (!this.root) {
             this.root = node;
         } else {
-
             let current = this.root;
-
             while (current) {
-
                 if (node.data > current.data) {
                     if (!current.right) {
                         current.right = node;
@@ -34,10 +28,7 @@ class Tree {
                         break;
                     }
                     current = current.left;
-                } else {
-                    break;
                 }
-
             }
         }
     }
@@ -105,7 +96,15 @@ class Tree {
     }
 
     bfs() {
+        const queue = [];
+        queue.push(this.root);
+        while(queue.length) {
+            const node = queue.shift();
+            console.log(node.data);
 
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
     }
 
     preOrder(node) {
@@ -133,28 +132,31 @@ class Tree {
     }
 
 
-    getMin(node) {
-        if (!node) node = this.root;
+    getMin(node = this.root) {
         while (node.left) node = node.left;
         return node;
     }
 
-    getMax() {
-
+    getMax(node = this.root) {
+        while(node.right) node = node.right;
+        return node;
     }
 
-    getHeight() {
-
+    getHeight(node) {
+        if(!node) return -1;
+        const left = this.getHeight(node.left);
+        const right = this.getHeight(node.right);
+        return Math.max(left, right) + 1;
     }
 
-    isBalanced() {
-
+    isBalanced(node = this.root) {
+        if (node === null) return true;
+        const leftHeight = this.getHeight(node.left);
+        const rightHeight = this.getHeight(node.right);
+        if (Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right)) return true;
+        return false;
     }
-
-
 }
-
-
 
 const BST = new Tree();
 
@@ -182,8 +184,14 @@ BST.add(12);
 BST.add(30);
 BST.add(25);
 
-BST.remove(12);
+// BST.remove(12);
 
 // console.log(BST.contains(4));
 
-BST.dfs();
+// BST.dfs();
+
+BST.bfs();
+
+console.log(BST.isBalanced());
+
+
