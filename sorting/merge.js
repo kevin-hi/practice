@@ -2,7 +2,7 @@ class Merge {
 
     sort(a) {
         this.aux = [];
-        this.split(a, 0, a.length-1);
+        this.split(a, 0, a.length - 1);
         return a;
     }
 
