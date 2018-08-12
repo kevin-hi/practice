@@ -143,7 +143,7 @@ class Tree {
     }
 
     getHeight(node) {
-        if(!node) return -1;
+        if(!node) return 0;
         const left = this.getHeight(node.left);
         const right = this.getHeight(node.right);
         return Math.max(left, right) + 1;
@@ -153,8 +153,7 @@ class Tree {
         if (node === null) return true;
         const leftHeight = this.getHeight(node.left);
         const rightHeight = this.getHeight(node.right);
-        if (Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right)) return true;
-        return false;
+        return (Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right))
     }
 }
 
