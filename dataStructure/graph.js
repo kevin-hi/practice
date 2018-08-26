@@ -10,6 +10,7 @@ class Graph {
         for (let v = 0; v <= V; v++) {
             this.adj[v] = [];
         }
+        this.stack = [];
     }
 
     getV() {
@@ -22,8 +23,27 @@ class Graph {
 
     addEdge(v, w) {
         this.adj[v].push(w);
-        this.adj[w].push(v);
+        //Uncomment below to enable undirected graph
+        // this.adj[w].push(v);
         this.E++;
+    }
+
+    topologySort(s) {
+        this.s = s;
+        for (let i = 0; i < this.adj.length; i++) {
+            if(this.adj[i].length) this.dfsTopology(i);
+        }
+        console.log(this.stack.reverse());
+    }
+
+    dfsTopology(s) {
+        this.marked[s] = true;
+        this.count++;
+        for (let i = 0; i < this.adj[s].length; i++) {
+            const adjValue = this.adj[s][i];
+            if (!this.marked[adjValue]) this.dfsTopology(adjValue);
+        }
+        this.stack.push(s);
     }
 
     depthFirstSearch(s) {
@@ -32,7 +52,6 @@ class Graph {
     }
 
     dfs(s) {
-        console.log(s);
         this.marked[s] = true;
         this.count++;
         for (let i = 0; i < this.adj[s].length; i++) {
@@ -69,7 +88,7 @@ class Graph {
     pathTo(v) {
         if (!this.hasPathTo(v)) return;
         const path = [];
-        for (let x = v; x != this.s; x = this.edgeTo[x]) path.push(x);
+        for (let x = v; x !== this.s; x = this.edgeTo[x]) path.push(x);
         path.push(this.s);
         return path.reverse();
     }
@@ -80,19 +99,30 @@ class Graph {
 
 }
 
-const graph = new Graph(6);
+const graph = new Graph(7);
 
-graph.addEdge(0, 1);
-graph.addEdge(0, 2);
-graph.addEdge(0, 6);
-graph.addEdge(0, 5);
-graph.addEdge(6, 4);
-graph.addEdge(4, 5);
-graph.addEdge(4, 3);
-graph.addEdge(3, 5);
+// graph.addEdge(0, 1);
+// graph.addEdge(0, 2);
+// graph.addEdge(0, 6);
+// graph.addEdge(0, 5);
+// graph.addEdge(6, 4);
+// graph.addEdge(4, 5);
+// graph.addEdge(4, 3);
+// graph.addEdge(3, 5);
 
-// graph.depthFirstSearch(0);
-graph.breathFirstSearch(0);
+
+graph.addEdge(0, 4);
+graph.addEdge(1, 0);
+graph.addEdge(1, 4);
+graph.addEdge(1, 7);
+graph.addEdge(2, 0);
+graph.addEdge(3, 6);
+graph.addEdge(5, 0);
+graph.addEdge(5, 1);
+graph.addEdge(5, 2);
+
+graph.topologySort();
+// graph.breathFirstSearch(0);
 // console.log(graph.pathTo(3));
 
 console.log(graph);

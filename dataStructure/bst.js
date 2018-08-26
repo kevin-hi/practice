@@ -96,14 +96,30 @@ class Tree {
     }
 
     bfs() {
-        const queue = [];
-        queue.push(this.root);
+        const queue = [this.root];
+        let level = 0;
+        let currentLevelItems = 1;
+        let nextLevelItems = 0;
+
         while(queue.length) {
             const node = queue.shift();
+            currentLevelItems--;
             console.log(node.data);
 
-            if (node.left) queue.push(node.left);
-            if (node.right) queue.push(node.right);
+            if (node.left) {
+                queue.push(node.left);
+                nextLevelItems++;
+            }
+            if (node.right) {
+                queue.push(node.right);
+                nextLevelItems++;
+            }
+            if (currentLevelItems === 0) {
+                level++;
+                console.log('Level: ' + level);
+                currentLevelItems = nextLevelItems;
+                nextLevelItems = 0;
+            }
         }
     }
 
@@ -134,6 +150,16 @@ class Tree {
 
     getMin(node = this.root) {
         while (node.left) node = node.left;
+        return node;
+    }
+
+    lowestCommonAncestor(node, p, q) {
+        if (node.data > p && node.data > q) {
+            return this.lowestCommonAncestor(node.left, p, q);
+        }
+        if (node.data < p && node.data < q) {
+            return this.lowestCommonAncestor(node.right, p, q)
+        }
         return node;
     }
 
@@ -183,14 +209,34 @@ BST.add(12);
 BST.add(30);
 BST.add(25);
 
+
+// BST.add(6);
+// BST.add(2);
+// BST.add(0);
+// BST.add(4);
+// BST.add(3);
+// BST.add(5);
+// BST.add(8);
+// BST.add(7);
+// BST.add(9);
+
+// BST.add(3);
+// BST.add(9);
+// BST.add(20);
+// BST.add(15);
+// BST.add(7);
+
 // BST.remove(12);
 
 // console.log(BST.contains(4));
 
-// BST.dfs();
+// console.log(BST.lowestCommonAncestor(4, 8));
 
 BST.bfs();
 
-console.log(BST.isBalanced());
+// console.log(BST.isBalanced());
+
+
+
 
 
