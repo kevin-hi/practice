@@ -23,5 +23,16 @@
  * @return {boolean}
  */
 const canJump = function(nums) {
+    let reachablePoint = nums.length - 1;
 
+    //Start with 2nd to last point to see if that point can reach the end
+    for (let i = nums.length - 2; i >= 0; i--)
+        //How many steps we can take here is greater or equal to the difference between the
+        //last reachable point minus current position
+        //We keep going back and see if we can reach the last reachable point
+        if (nums[i] >=  reachablePoint - i) reachablePoint = i;
+
+    return reachablePoint === 0;
 };
+
+console.log(canJump([2, 3, 1, 1, 4]));
