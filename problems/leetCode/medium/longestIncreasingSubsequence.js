@@ -35,6 +35,11 @@ const lengthOfLISBruteForce = function(nums) {
     return findLength(-Infinity, 0);
 };
 
+/**
+ * Bottom up longest sequence
+ * @param nums
+ * @returns {number}
+ */
 const lengthOfLIS = function(nums) {
     if (!nums) return 0;
     if (nums.length === 1) return 1;
