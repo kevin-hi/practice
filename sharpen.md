@@ -39,16 +39,16 @@ const isSameTree = (p, q) => {
 ### lowestCommonAncestor
 ```javascript
 const lowestCommonAncestor = (node, p, q) =>{
-    if (node.val > p && node.val > q) return this.lowestCommonAncestor(node.left, p, q);
-    if (node.val < p && node.val < q) return this.lowestCommonAncestor(node.right, p, q);
+    if (node.val > p && node.val > q) return lowestCommonAncestor(node.left, p, q);
+    if (node.val < p && node.val < q) return lowestCommonAncestor(node.right, p, q);
     
     return node;
 }
 ```
 
-### bfs
+### breathFirstSearchLevels
 ```javascript
-const bfs = (node) => {
+const breathFirstSearchLevels = (node) => {
     const queue = [node];
     let level = 0;
     let currentLevelItems = 1;
