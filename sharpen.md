@@ -4,18 +4,22 @@
 ```javascript
 const getHeight = node => {
     if(!node) return 0;
+    
     const left = getHeight(node.left);
     const right = getHeight(node.right);
+    
     return Math.max(left, right) + 1;
 }
 ```
 
 ### isBalanced
 ```javascript
- const isBalanced = (node ) => {
+const isBalanced = (node ) => {
     if (node === null) return true;
+    
     const leftHeight = getHeight(node.left);
     const rightHeight = getHeight(node.right);
+    
     return (Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right))
 }
 ```
@@ -23,8 +27,10 @@ const getHeight = node => {
 ### isSame
 ```javascript
 const isSameTree = (p, q) => {
+    
     if (p === null || q === null) return p === q;
     if (p.val !== q.val) return false;
+    
     return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);    
 }
 
