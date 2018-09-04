@@ -1,4 +1,4 @@
-## BST
+## Binary Search Tree
 
 ### getHeight
 ```javascript
@@ -74,3 +74,26 @@ const breathFirstSearchLevels = (node) => {
     }
 }
 ```
+
+## Linked List
+
+### Reverse Linked List
+```javascript
+const reverseList = head => {
+    if (head === null) return null;
+
+    let prev = null;
+    let next = null;
+
+    while (head) {
+        next = head.next;
+        head.next = prev;
+        prev = head;
+        head = next;
+    }
+
+    return prev;
+};
+
+```
+
