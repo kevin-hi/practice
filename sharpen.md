@@ -1,6 +1,6 @@
-##BST
+## BST
 
-###getHeight
+### getHeight
 ```javascript
 const getHeight = node => {
     if(!node) return 0;
@@ -10,7 +10,7 @@ const getHeight = node => {
 }
 ```
 
-###isBalanced
+### isBalanced
 ```javascript
  const isBalanced = (node ) => {
     if (node === null) return true;
@@ -20,7 +20,7 @@ const getHeight = node => {
 }
 ```
 
-###isSame
+### isSame
 ```javascript
 const isSameTree = (p, q) => {
     if (p === null || q === null) return p === q;
@@ -30,7 +30,7 @@ const isSameTree = (p, q) => {
 
 ```
 
-###lowestCommonAncestor
+### lowestCommonAncestor
 ```javascript
 const lowestCommonAncestor = (node, p, q) =>{
     if (node.val > p && node.val > q) return this.lowestCommonAncestor(node.left, p, q);
@@ -40,7 +40,7 @@ const lowestCommonAncestor = (node, p, q) =>{
 }
 ```
 
-###BFS with level
+### bfs
 ```javascript
 const bfs = (node) => {
     const queue = [node];
