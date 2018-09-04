@@ -1,5 +1,18 @@
 ## Binary Search Tree
 
+### find
+```javascript
+const find = val => {
+    let current = this.root;
+    
+    while (current) {
+    if (val === current.val) return true;
+        current = val > current.val ? current.right : current.left;
+    }
+    return false;
+};
+```
+
 ### getHeight
 ```javascript
 const getHeight = node => {
@@ -9,7 +22,7 @@ const getHeight = node => {
     const right = getHeight(node.right);
     
     return Math.max(left, right) + 1;
-}
+};
 ```
 
 ### isBalanced
@@ -21,7 +34,7 @@ const isBalanced = (node ) => {
     const rightHeight = getHeight(node.right);
     
     return (Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right))
-}
+};
 ```
 
 ### isSame
@@ -32,7 +45,7 @@ const isSameTree = (p, q) => {
     if (p.val !== q.val) return false;
     
     return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);    
-}
+};
 
 ```
 
@@ -43,7 +56,7 @@ const lowestCommonAncestor = (node, p, q) =>{
     if (node.val < p && node.val < q) return lowestCommonAncestor(node.right, p, q);
     
     return node;
-}
+};
 ```
 
 ### breathFirstSearchLevels
@@ -72,7 +85,7 @@ const breathFirstSearchLevels = (node) => {
             nextLevelItems = 0;
         }
     }
-}
+};
 ```
 
 ## Linked List
