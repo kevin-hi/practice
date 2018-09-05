@@ -52,10 +52,13 @@ const isSameTree = (p, q) => {
 ### lowestCommonAncestor
 ```javascript
 const lowestCommonAncestor = (node, p, q) =>{
-    if (node.val > p && node.val > q) return lowestCommonAncestor(node.left, p, q);
-    if (node.val < p && node.val < q) return lowestCommonAncestor(node.right, p, q);
-    
-    return node;
+    if (!root || root === p || root === q) return root;
+    const left = lowestCommonAncestor(root.left, p, q);
+    const right = lowestCommonAncestor(root.right, p, q);
+    if (!left) return right;
+    if (!right) return left;
+       
+    return root;
 };
 ```
 
