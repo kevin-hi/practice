@@ -28,10 +28,41 @@
  * @return {number[][]}
  */
 const zigzagLevelOrder = function(root) {
+    const queue = [root];
+    let level = 0;
+    const res = [];
+    let itemsCurrent = 1;
+    let itemsNext = 0;
+
+    while (queue.length) {
+
+        const node = queue.shift();
+        itemsCurrent--;
+
+        if (!res[level]) res[level] = [];
+
+        if (level % 2 === 0) res[level].push(node.val);
+        else res[level].unshift(node.val);
 
 
+        if (node.left) {
+            itemsNext++;
+            queue.push(node.left);
+        }
 
+        if (node.right) {
+            itemsNext++;
+            queue.push(node.right);
+        }
 
+        if (itemsCurrent === 0) {
+            level++;
+            itemsCurrent = itemsNext;
+            itemsNext = 0;
+        }
+    }
+
+    return res;
 };
 
 console.log(zigzagLevelOrder(root));
