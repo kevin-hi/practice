@@ -21,18 +21,53 @@ const pourWater = function(heights, V, K) {
     while(V-- > 0) {
 
         let current = K;
-        // Move left
+        //Move left if we are greater than 0
+        //Our next left item is smaller or equal to current
         while(current > 0 && heights[current] >= heights[current - 1]) current--;
 
-        // Move right
+        //Move right if we are less than 0
+        //Our next right item is smaller or equal to current
         while(current < heights.length - 1 && heights[current] >= heights[current + 1]) current++;
 
-        // Move left to K
+        //Move left to K
+        //Our current item is to the left of K and our current water is greater or equal to the next left
         while(current > K && heights[current] >= heights[current - 1]) current--;
 
         heights[current]++;
     }
 
+    return heights;
+};
+
+const pourWater2nd = (heights, V, K) => {
+
+    while (V > 0) {
+        let idx = K;
+        for(let i = K; i >=0; i--) {
+            if (heights[i] < heights[idx]) {
+                idx = i;
+            } else if (heights[i] > heights[idx]) {
+                break;
+            }
+        }
+
+        if (idx !== K) {
+            V--;
+            heights[idx]++;
+            continue;
+        }
+
+        for(let i = K; i < heights.length; i++) {
+            if (heights[i] < heights[idx]) {
+                idx = i;
+            } else if (heights[i] > heights[idx]) {
+                break;
+            }
+        }
+
+        V--;
+        heights[idx]++;
+    }
     return heights;
 };
 
